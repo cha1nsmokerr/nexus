@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS // Academic AI Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Vertical Ribbed Lime Fluted Curtain Backlight & Falling Cascades (Copied from Northline Theme) -->
+  <div class="curtain-light-backdrop"></div>
+  <div class="lime-falling-drops"></div>
+  <div class="ambient-glow glow-lime-beam"></div>
+  <div class="ambient-glow glow-lime-top"></div>
+
+  <div class="app-container">
+    
+    <!-- Top Command Bar: Transparent & Northline-Inspired -->
+    <header class="command-bar-transparent">
+      
+      <!-- Center Hero: Unique 'N' Logo + Editorial Headline in Capitals + Realistic Letter -->
+      <div class="brand-center-hero">
+        
+        <!-- Unique 'N' Logo (Rounded Dark Square with Lime Accents) -->
+        <div class="logo-n-unique" title="NEXUS">
+          <svg viewBox="0 0 44 44" class="logo-n-svg">
+            <rect x="2" y="2" width="40" height="40" rx="12" fill="#12160F" stroke="#252D1C" stroke-width="2"/>
+            <path d="M13 31V13H18.5L25.5 24.5V13H31V31H25.5L18.5 19.5V31H13Z" fill="#C8F926"/>
+            <circle cx="31" cy="13" r="2.5" fill="#FFFFFF"/>
+          </svg>
+        </div>
+
+        <!-- Heading in Capital Editorial Serif Form -->
+        <h1 class="hero-nexus-title">
+          <span class="hero-word-nexus">NEXUS</span>
+          <span class="hero-word-italic">ACADEMIC</span>
+          <span class="hero-word-studio">AI STUDIO</span>
+        </h1>
+        
+        <!-- Real Looking Miniature Envelope Picture / Icon -->
+        <button type="button" class="btn-realistic-letter" id="btnOpenLetter" title="Click to open letter from NEXUS">
+          <div class="real-letter-graphic">
+            <div class="real-letter-paper"></div>
+            <div class="real-letter-envelope-body">
+              <div class="real-letter-flap"></div>
+              <div class="real-letter-seal"></div>
+              <span class="letter-postage-stamp">✦</span>
+            </div>
+          </div>
+          <span class="letter-tooltip">Read Letter</span>
+        </button>
+      </div>
+
+      <!-- Floating Controls Row (Clean, Transparent, Pill Buttons) -->
+      <div class="transparent-controls-row">
+        
+        <!-- Google Account Module -->
+        <div class="auth-module-wrapper">
+          <div id="authSignedOut" class="auth-state">
+            <button type="button" class="btn-google-signin" id="btnGoogleSignIn">
+              <svg class="google-icon" viewBox="0 0 24 24">
+                <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.1 9 5 12 5z"/>
+                <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
+                <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z"/>
+                <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.1-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"/>
+              </svg>
+              <span>Sign in</span>
+            </button>
+          </div>
+
+          <div id="authSignedIn" class="auth-state auth-user-card" style="display: none;">
+            <div class="user-avatar" id="userAvatar">N</div>
+            <div class="user-info-text">
+              <span class="user-email" id="userEmailDisplay">student@gmail.com</span>
+              <span class="sync-badge">✓ Cloud Sync</span>
+            </div>
+            <button type="button" class="btn-signout" id="btnGoogleSignOut" title="Sign Out">Sign Out</button>
+          </div>
+        </div>
+
+        <!-- Mode Toggle: Demo vs Live -->
+        <div class="mode-switch-wrapper">
+          <span class="mode-label" id="demoLabel">DEMO</span>
+          <label class="switch" title="Toggle Demo vs Live LLM">
+            <input type="checkbox" id="modeToggle">
+            <span class="slider round"></span>
+          </label>
+          <span class="mode-label" id="liveLabel">LIVE LLM</span>
+        </div>
+
+        <!-- Provider Selector -->
+        <div class="provider-wrapper" id="providerWrapper">
+          <select id="providerSelect" class="nexus-select" title="Select Provider">
+            <option value="gemini">Gemini 2.5 Flash</option>
+            <option value="groq">Groq Free API</option>
+          </select>
+        </div>
+
+        <!-- API Key Input -->
+        <div class="api-key-wrapper" id="apiKeyWrapper">
+          <div class="input-with-icon">
+            <input type="password" id="apiKeyInput" class="nexus-input key-input" placeholder="Enter API Key...">
+            <button type="button" class="btn-icon" id="toggleKeyVisibility" title="Toggle Visibility">👁</button>
+          </div>
+          <button type="button" class="btn-save-key" id="saveKeyBtn">Save</button>
+        </div>
+
+        <!-- Live CGPA Pill -->
+        <div class="cgpa-pill" id="headerCgpaPill" title="Current Academic Standing">
+          <span class="pill-dot">•</span>
+          <span class="pill-label">CGPA</span>
+          <span class="pill-val" id="headerCgpaVal">0.00</span>
+          <span class="pill-status" id="headerCgpaStatus">READY</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Layout: 65% Bento Dashboard / 35% AI Agent Terminal -->
+    <main class="workspace-grid">
+      
+      <!-- LEFT COLUMN: Bento Dashboard (65%) -->
+      <section class="bento-dashboard">
+        
+        <!-- Bento Card 1: Coursework & Deliverables -->
+        <div class="bento-card card-dark-theme card-mission-control interactive-section" id="missionControlCard">
+          <div class="card-header">
+            <div class="header-title-group">
+              <span class="section-bullet">•</span>
+              <div>
+                <h2>Coursework & Deliverables</h2>
+                <p class="subtitle">Track deadlines, module deliverables, and task completions</p>
+              </div>
+            </div>
+            <div class="header-actions">
+              <div class="filter-tabs" id="assignmentFilters">
+                <button class="filter-btn active" data-filter="all">All (<span id="countAll">0</span>)</button>
+                <button class="filter-btn" data-filter="high">Critical/High (<span id="countHigh">0</span>)</button>
+                <button class="filter-btn" data-filter="completed">Completed (<span id="countCompleted">0</span>)</button>
+              </div>
+              <button class="btn-chartreuse-pill" id="btnOpenNewTaskModal">+ Add task</button>
+            </div>
+          </div>
+
+          <!-- Quick Add Drawer / Form -->
+          <div class="task-add-drawer" id="taskAddDrawer">
+            <form id="manualTaskForm" class="drawer-form">
+              <input type="text" id="taskTitleInput" placeholder="Assignment Title (e.g. Java OOP Lab 4)" class="nexus-input" required>
+              <input type="text" id="taskModuleInput" placeholder="Course Module (e.g. Java OOP, Data Science)" class="nexus-input" required>
+              <input type="date" id="taskDueDateInput" class="nexus-input" required>
+              <select id="taskPriorityInput" class="nexus-select">
+                <option value="Critical">Critical</option>
+                <option value="High" selected>High</option>
+                <option value="Normal">Normal</option>
+              </select>
+              <button type="submit" class="btn-chartreuse-pill">Save Task</button>
+              <button type="button" class="btn-dark-pill" id="btnCancelAddDrawer">Cancel</button>
+            </form>
+          </div>
+
+          <!-- Assignment List Viewport -->
+          <div class="task-list-viewport" id="assignmentList">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Bottom Bento Row (Simulator + Focus Timer) -->
+        <div class="bento-split-row">
+          
+          <!-- Bento Card 2: CGPA & Trajectory Simulator -->
+          <div class="bento-card card-dark-theme card-trajectory interactive-section" id="trajectoryCard">
+            <div class="card-header">
+              <div class="header-title-group">
+                <span class="section-bullet">•</span>
+                <div>
+                  <h2>CGPA Trajectory Simulator</h2>
+                  <p class="subtitle">Calculate target GPA requirements for graduation goals</p>
+                </div>
+              </div>
+              <span class="metric-badge" id="gpaFeasibilityBadge">READY</span>
+            </div>
+
+            <div class="trajectory-metrics-grid">
+              <div class="metric-box interactive-option">
+                <span class="metric-label">CURRENT CGPA</span>
+                <div class="metric-value-row">
+                  <span class="metric-number text-lime" id="dispCurrentCgpa">0.00</span>
+                  <span class="metric-total">/ 4.00</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar bar-lime" id="barCurrentCgpa" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-box interactive-option">
+                <span class="metric-label">CREDITS COMPLETED</span>
+                <div class="metric-value-row">
+                  <span class="metric-number text-white" id="dispCreditsDone">0</span>
+                  <span class="metric-total">/ 128 Total</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar bar-white" id="barCreditsDone" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-box interactive-option">
+                <span class="metric-label">TARGET CGPA</span>
+                <div class="metric-value-row">
+                  <span class="metric-number text-lime-bright" id="dispTargetCgpa">0.00</span>
+                  <span class="metric-total">/ 4.00</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar bar-lime-bright" id="barTargetCgpa" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-box highlight-box interactive-option" id="requiredGpaBox">
+                <span class="metric-label">REQUIRED THIS SEMESTER</span>
+                <div class="metric-value-row">
+                  <span class="metric-number text-lime-glow" id="dispRequiredGpa">0.00</span>
+                  <span class="metric-total">GPA</span>
+                </div>
+                <div class="trajectory-note" id="trajectoryNote">
+                  Set academic metrics below to calculate required semester GPA.
+                </div>
+              </div>
+            </div>
+
+            <!-- Manual Simulation Inputs -->
+            <div class="simulator-controls interactive-option">
+              <div class="sim-input-group">
+                <label for="simCurrentCgpa">Current CGPA</label>
+                <input type="number" id="simCurrentCgpa" step="0.01" min="0" max="4" value="0.00" class="nexus-input-sm">
+              </div>
+              <div class="sim-input-group">
+                <label for="simCreditsDone">Credits Done</label>
+                <input type="number" id="simCreditsDone" step="1" min="0" max="150" value="0" class="nexus-input-sm">
+              </div>
+              <div class="sim-input-group">
+                <label for="simTargetCgpa">Target CGPA</label>
+                <input type="number" id="simTargetCgpa" step="0.01" min="0" max="4" value="0.00" class="nexus-input-sm">
+              </div>
+              <div class="sim-input-group">
+                <label for="simSemCredits">Sem Credits</label>
+                <input type="number" id="simSemCredits" step="1" min="0" max="30" value="0" class="nexus-input-sm">
+              </div>
+              <button class="btn-chartreuse-pill" id="btnManualSimulate">Simulate</button>
+            </div>
+          </div>
+
+          <!-- Bento Card 3: Focus Sprint Timer with Real Online Rain Audio -->
+          <div class="bento-card card-dark-theme card-focus interactive-section" id="focusCard">
+            <div class="card-header">
+              <div class="header-title-group">
+                <span class="section-bullet">•</span>
+                <div>
+                  <h2>Focus Sprint & Ambience</h2>
+                  <p class="subtitle">Timed study sessions with soothing background rain</p>
+                </div>
+              </div>
+              <div class="focus-task-tag" id="currentFocusTaskTag">
+                <span class="tag-pulse"></span>
+                <span id="currentFocusTaskName">[No Active Task]</span>
+              </div>
+            </div>
+
+            <!-- Timer Circle Display -->
+            <div class="timer-dial-wrapper">
+              <div class="circular-timer">
+                <svg class="timer-ring-svg" viewBox="0 0 200 200">
+                  <defs>
+                    <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#C8F926" />
+                      <stop offset="100%" stop-color="#FFFFFF" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="ring-bg" cx="100" cy="100" r="86" />
+                  <circle class="ring-progress" id="timerProgressRing" cx="100" cy="100" r="86" />
+                </svg>
+                <div class="timer-display-inner">
+                  <div class="timer-digits" id="timerDigits">25:00</div>
+                  <div class="timer-phase" id="timerPhase">STUDY SPRINT</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="timer-controls-row">
+              <div class="timer-main-actions">
+                <button class="btn-chartreuse-pill btn-timer-main" id="btnTimerStartPause">START SPRINT</button>
+                <button class="btn-dark-pill" id="btnTimerReset">RESET</button>
+              </div>
+              <div class="timer-presets">
+                <button class="btn-preset" data-time="15">15m</button>
+                <button class="btn-preset active" data-time="25">25m</button>
+                <button class="btn-preset" data-time="45">45m</button>
+                <button class="btn-preset" data-time="60">60m</button>
+              </div>
+            </div>
+
+            <!-- Real Rain Music Console -->
+            <div class="rain-audio-console interactive-option">
+              <div class="rain-header">
+                <div class="rain-title-group">
+                  <span class="rain-icon">🌧️</span>
+                  <div>
+                    <span class="rain-label">Real Online Rain Audio</span>
+                    <span class="rain-status" id="rainStatusText">OFF</span>
+                  </div>
+                </div>
+                <div class="rain-wave-bars" id="rainWaveBars">
+                  <span class="wave-bar"></span>
+                  <span class="wave-bar"></span>
+                  <span class="wave-bar"></span>
+                  <span class="wave-bar"></span>
+                </div>
+                <button type="button" class="btn-rain-toggle" id="btnRainToggle">Play Rain</button>
+              </div>
+
+              <div class="rain-controls-row">
+                <div class="rain-duration-group">
+                  <label for="rainTimingSelect">Duration:</label>
+                  <select id="rainTimingSelect" class="nexus-select-sm">
+                    <option value="match" selected>Match Sprint Timer</option>
+                    <option value="15">15 Minutes</option>
+                    <option value="30">30 Minutes</option>
+                    <option value="continuous">Continuous Loop</option>
+                  </select>
+                </div>
+
+                <div class="rain-volume-group">
+                  <label for="rainVolumeSlider">Volume:</label>
+                  <input type="range" id="rainVolumeSlider" min="0" max="100" value="70" class="rain-slider">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: AI Agent Terminal (35%) -->
+      <aside class="terminal-panel card-dark-theme interactive-section">
+        <div class="terminal-header">
+          <div class="terminal-title-group">
+            <div class="ai-avatar-ring">
+              <div class="ai-avatar-core">N</div>
+            </div>
+            <div>
+              <h3>NEXUS COGNITIVE AGENT</h3>
+              <div class="agent-engine-status">
+                <span class="status-dot-active"></span>
+                <span id="agentModeStatusText">LOCAL NLP ENGINE // READY</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn-icon" id="btnClearChat" title="Clear Chat History">🗑️</button>
+        </div>
+
+        <!-- Chat Feed Viewport -->
+        <div class="terminal-chat-feed" id="chatFeed">
+          <div class="chat-message message-agent">
+            <div class="msg-author-tag">NEXUS AGENT // READY</div>
+            <div class="msg-content">
+              Welcome to <strong>NEXUS ACADEMIC AI STUDIO</strong>.
+              <br><br>
+              Tap the miniature letter at the top to read your official university companion dispatch!
+            </div>
+            <div class="msg-timestamp">SYSTEM INITIALIZED</div>
+          </div>
+        </div>
+
+        <!-- Quick Action Chips -->
+        <div class="quick-action-chips">
+          <button class="chip-btn interactive-option" id="chipAddTasks" data-prompt="Add Java OOP Lab 5 due in 3 days priority Critical and R Data Analysis Project due in 6 days priority High">
+            <span class="chip-icon">⚡</span> + Add Java & R Tasks
+          </button>
+          <button class="chip-btn interactive-option" id="chipSimulate" data-prompt="Simulate my CGPA: current 3.42, 64 credits completed, target 3.60, with 16 credits this semester">
+            <span class="chip-icon">🎯</span> Calculate 3.60 CGPA Target
+          </button>
+          <button class="chip-btn interactive-option" id="chipFocus" data-prompt="Start a 25m focus sprint for Java OOP Lab 4 with rain music">
+            <span class="chip-icon">🌧️</span> Start 25m Study Sprint with Rain
+          </button>
+        </div>
+
+        <!-- Chat Input Form -->
+        <form class="terminal-input-bar" id="chatForm">
+          <div class="input-glow-wrapper">
+            <input 
+              type="text" 
+              id="chatInput" 
+              class="terminal-input" 
+              placeholder="Ask NEXUS or enter command (e.g. 'Add task...', 'Simulate 3.5 CGPA')..."
+              autocomplete="off"
+            >
+            <button type="submit" class="btn-send-command" id="btnSendCommand">
+              <svg viewBox="0 0 24 24" class="send-icon">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </aside>
+
+    </main>
+  </div>
+
+  <!-- REALISTIC PHYSICAL LETTER MODAL (PARCHMENT, WAX SEAL, POSTMARK) -->
+  <div class="letter-modal-backdrop" id="letterModal">
+    <div class="envelope-stage">
+      <div class="realistic-letter-container">
+        
+        <!-- The Realistic Physical Letter -->
+        <div class="real-physical-letter" id="realPhysicalLetter">
+          <button type="button" class="btn-close-letter" id="btnCloseLetter" title="Close Letter">✕</button>
+          
+          <!-- Vintage Postmark & Wax Seal Header -->
+          <div class="letter-heritage-header">
+            <div class="postmark-stamp">
+              <span class="postmark-circle">
+                <span class="postmark-inner">PARIS • 2026</span>
+                <span class="postmark-code">NEXUS ACADEMIC</span>
+              </span>
+            </div>
+
+            <!-- Authentic Crimson Wax Seal with Embossed 'N' -->
+            <div class="crimson-wax-seal">
+              <div class="wax-seal-outer">
+                <div class="wax-seal-inner">
+                  <span class="wax-seal-letter">N</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="heritage-postage">
+              <div class="postage-rect">
+                <span class="postage-price">100</span>
+                <span class="postage-label">AIR MAIL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Letter Written Content -->
+          <div class="letter-written-sheet">
+            <div class="letter-sheet-watermark">NEXUS</div>
+            
+            <!-- Animated Writing of NEXUS in Editorial Capitals -->
+            <h2 class="letter-animated-nexus" id="animatedNexusHeading">
+              <span class="calligraphy-char" style="--i:1">N</span>
+              <span class="calligraphy-char" style="--i:2">E</span>
+              <span class="calligraphy-char" style="--i:3">X</span>
+              <span class="calligraphy-char" style="--i:4">U</span>
+              <span class="calligraphy-char" style="--i:5">S</span>
+            </h2>
+
+            <!-- Animated Writing of 'your university companion' in Flowing Italic Calligraphy -->
+            <div class="letter-animated-companion" id="animatedSubHeading">
+              your university companion
+            </div>
+
+            <div class="letter-decorative-line">
+              <span class="line-diamond">◆</span>
+            </div>
+
+            <p class="real-letter-prose">
+              Dear Scholar,<br><br>
+              Welcome to your personal command center. Every grade milestone, deep work sprint, and assignment trajectory has been calibrated for your graduation excellence.
+            </p>
+
+            <div class="letter-signoff-row">
+              <div class="signoff-signature">Nexus Core Studio</div>
+              <div class="signoff-location">Academic District, 2026</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING ROBOT DOING PUSHUPS CONTINUOUSLY + COMPACT QUOTE BUBBLE -->
+  <div class="robot-companion-container" id="robotCompanion">
+    <!-- Compact Motivation Quote Bubble -->
+    <div class="robot-speech-bubble-compact" id="robotSpeechBubble">
+      <div class="bubble-header-compact">
+        <div class="bubble-brand-compact">
+          <span class="bubble-sparkle">✦</span>
+          <span class="bubble-title-compact">Daily Motivation</span>
+        </div>
+        <button type="button" class="btn-close-bubble" id="btnCloseMotivation" title="Close motivation">✕</button>
+      </div>
+      <div class="bubble-quote-body-compact">
+        <p class="quote-text-compact" id="robotQuoteText">"Loading inspiring thoughts..."</p>
+        <span class="quote-author-compact" id="robotQuoteAuthor">— Loading</span>
+      </div>
+      <div class="bubble-actions-compact">
+        <button type="button" class="btn-bubble-refresh-compact" id="btnNewQuote">New Quote ✦</button>
+      </div>
+    </div>
+
+    <!-- Floating Robot Mascot Button Doing Pushups Continuously -->
+    <button type="button" class="btn-robot-pushups" id="btnRobotToggle" title="Watch Spark Bot grinding pushups! Click for quote.">
+      <div class="robot-pushup-stage">
+        
+        <!-- Floor / Pushup shadow mat -->
+        <div class="pushup-shadow"></div>
+
+        <!-- Robot Anatomy Illustrated for Pushups -->
+        <div class="robot-pushup-body">
+          <svg class="robot-pushup-svg" viewBox="0 0 80 80">
+            <!-- Planted hands on floor (fixed base) -->
+            <ellipse cx="14" cy="62" rx="4" ry="2.5" fill="#FFFFFF"/>
+            <ellipse cx="66" cy="62" rx="4" ry="2.5" fill="#FFFFFF"/>
+
+            <!-- Bending pushup arms -->
+            <path d="M 18 36 Q 10 50 14 62" stroke="#C8F926" stroke-width="3.5" stroke-linecap="round" fill="none" class="pushup-arm-left"/>
+            <path d="M 62 36 Q 70 50 66 62" stroke="#C8F926" stroke-width="3.5" stroke-linecap="round" fill="none" class="pushup-arm-right"/>
+
+            <!-- Moving Torso & Head (dips down during pushup) -->
+            <g class="pushup-torso-unit">
+              <!-- Antenna with pulsating lime bulb -->
+              <circle cx="40" cy="11" r="4.5" fill="#C8F926" class="pushup-antenna-bulb"/>
+              <line x1="40" y1="15" x2="40" y2="22" stroke="#C8F926" stroke-width="3" stroke-linecap="round"/>
+              
+              <!-- Chassis -->
+              <rect x="20" y="22" width="40" height="28" rx="8" fill="#141810" stroke="#C8F926" stroke-width="2" class="pushup-chassis"/>
+              <rect x="25" y="27" width="30" height="17" rx="5" fill="#080A06"/>
+              
+              <!-- Focused Workout Eyes -->
+              <ellipse cx="33" cy="35" rx="3.5" ry="3" fill="#C8F926" class="pushup-eye"/>
+              <ellipse cx="47" cy="35" rx="3.5" ry="3" fill="#C8F926" class="pushup-eye"/>
+              <line x1="37" y1="39" x2="43" y2="39" stroke="#C8F926" stroke-width="2" stroke-linecap="round"/>
+
+              <!-- Workout Sweat Drop (appears at bottom of rep) -->
+              <path d="M 61 24 C 63 26 63 28 61 29 C 59 28 59 26 61 24 Z" fill="#6EE7B7" class="pushup-sweat"/>
+            </g>
+          </svg>
+        </div>
+
+        <span class="robot-pushup-counter-badge" id="pushupRepBadge">PUSHUPS</span>
+      </div>
+    </button>
+  </div>
+
+  <!-- Google Sign-In Modal -->
+  <div class="modal-backdrop" id="googleAuthModal">
+    <div class="modal-card card-dark-theme">
+      <div class="modal-header">
+        <div class="google-modal-brand">
+          <svg class="google-icon-lg" viewBox="0 0 24 24">
+            <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.1 9 5 12 5z"/>
+            <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
+            <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z"/>
+            <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.1-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"/>
+          </svg>
+          <h3>Sign in with Google</h3>
+        </div>
+        <button type="button" class="btn-close-modal" id="btnCloseAuthModal">✕</button>
+      </div>
+      <p class="modal-desc">Connect your Gmail account to save your coursework deliverables, CGPA calculations, and focus sessions.</p>
+      
+      <form id="googleSignInForm" class="modal-form">
+        <label for="gmailInput">Enter your Gmail Address</label>
+        <input type="email" id="gmailInput" placeholder="yourname@gmail.com" class="nexus-input" required>
+        
+        <div class="quick-accounts-section">
+          <span>Or choose a demo student profile:</span>
+          <div class="account-pill-list">
+            <button type="button" class="account-pill" data-email="alex.student@gmail.com">alex.student@gmail.com</button>
+            <button type="button" class="account-pill" data-email="maya.cs@gmail.com">maya.cs@gmail.com</button>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn-chartreuse-pill btn-modal-confirm">Sign In & Load Data</button>
+          <button type="button" class="btn-dark-pill" id="btnCancelAuthModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
